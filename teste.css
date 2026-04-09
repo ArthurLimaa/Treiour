@@ -1,0 +1,60 @@
+body {
+    margin: 0;
+    font-family: Arial;
+    color: white;
+    background: radial-gradient(circle at top left, #2b0f3a 0%, #101222 40%, #0d0d16 100%);
+    min-height: 100vh;
+}
+
+/* HEADER */
+.header {
+    position: relative;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.menu {
+    position: absolute;
+    left: 20px;
+    font-size: 30px;
+}
+
+.titulo {
+    font-size: 50px;
+    font-weight: bold;
+}
+
+/* CONTAINER */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* CARD TOPO */
+.resumo {
+    width: 40%;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+/* GRID */
+.grid {
+    display: flex;
+    gap: 20px;
+    width: 80%;
+}
+
+/* CARDS */
+.card {
+    background: rgba(0,0,0,0.4);
+    padding: 20px;
+    border-radius: 20px;
+    flex: 1;
+}
+
+.center {
+    text-align: center;
+}
