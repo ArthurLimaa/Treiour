@@ -58,6 +58,8 @@ body::after {
 }
 
 .menu {
+  position: fixed;
+  left: 20px;
   font-size: 1.8rem;
   font-weight: bold;
   cursor: pointer;
@@ -73,6 +75,7 @@ body::after {
   backdrop-filter: blur(10px);
   box-shadow: 0 8px 20px rgba(0,0,0,0.25);
 }
+
 
 .menu:hover {
   color: #b89cff;
@@ -124,14 +127,7 @@ body::after {
   transform: translateX(4px);
 }
 
-/* LOGO */
-.logo {
-  font-size: 4rem;
-  color: #e8e6f2;
-  text-shadow: 3px 3px 0px black;
-  letter-spacing: 3px;
-  z-index: 2;
-}
+
 
 /* CONTAINER */
 .container {

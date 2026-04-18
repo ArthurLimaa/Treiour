@@ -14,7 +14,7 @@ const cardsData = [
     title: "Seu Treino",
     text: "Monte, acompanhe e evolua seus treinos.",
     image: "https://th.bing.com/th/id/R.c4185b7eeabeac37b063f79e1b9a3276?rik=K7nWHyU3V5E94g&pid=ImgRaw&r=0",
-    link: "treino.html"
+    link: "seutreino.html"
   },
   {
     title: "Análise de Treino",
@@ -26,7 +26,7 @@ const cardsData = [
     title: "Competição",
     text: "Desafie amigos e participe de rankings.",
     image: "https://blog.acqualive.com.br/wp-content/uploads/2018/01/ThinkstockPhotos-861047682-1.jpg",
-    link: "competicao/competicao.html"
+    link: "competicao.html"
   }
 ];
 
