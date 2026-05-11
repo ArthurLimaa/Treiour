@@ -1,213 +1,469 @@
-const challenge = {
+const defaultChallenge = {
+
   name: "Desafio de Abril",
+
   participants: [
+
+    {
+      name: "Luis",
+      color: "#8b5cf6",
+      checkins: [2,4,6,8,10,12,14,18,20]
+    },
+
     {
       name: "Pedro",
-      color: "#facc15",
-      checkins: [2, 4, 6, 10, 11, 12, 13, 16, 18, 20]
+      color: "#22c55e",
+      checkins: [1,3,5,8,12,17]
     },
-    {
-      name: "Você",
-      color: "#8b5cf6",
-      checkins: [3, 5, 8, 11, 13, 17, 19, 23]
-    },
+
     {
       name: "João",
-      color: "#22c55e",
-      checkins: [9, 12, 18]
+      color: "#facc15",
+      checkins: [2,7,9,13,15,20,25]
     }
+
   ]
+
 };
 
-const rankingList = document.getElementById("rankingList");
-const legend = document.getElementById("legend");
-const calendarHeader = document.getElementById("calendarHeader");
-const calendarGrid = document.getElementById("calendarGrid");
-const challengeName = document.getElementById("challengeName");
-const totalParticipants = document.getElementById("totalParticipants");
+let challenge =
+JSON.parse(localStorage.getItem("challenge"))
+|| defaultChallenge;
 
-const daysOfWeek = ["DOM", "SEG", "TER", "QUA", "QUI", "SEX", "SÁB"];
+/* ELEMENTOS */
+
+const rankingList =
+document.getElementById("rankingList");
+
+const legend =
+document.getElementById("legend");
+
+const calendarHeader =
+document.getElementById("calendarHeader");
+
+const calendarGrid =
+document.getElementById("calendarGrid");
+
+const challengeName =
+document.getElementById("challengeName");
+
+const totalParticipants =
+document.getElementById("totalParticipants");
+
+const bestStreak =
+document.getElementById("bestStreak");
+
+const activeDays =
+document.getElementById("activeDays");
+
+const leaderName =
+document.getElementById("leaderName");
+
+const totalTrainings =
+document.getElementById("totalTrainings");
+
+const averagePresence =
+document.getElementById("averagePresence");
+
+const modalOverlay =
+document.getElementById("modalOverlay");
+
+const openModal =
+document.getElementById("openModal");
+
+const closeModal =
+document.getElementById("closeModal");
+
+const saveCompetition =
+document.getElementById("saveCompetition");
+
+const menuBtn =
+document.getElementById("menuBtn");
+
+const sidebar =
+document.getElementById("sidebar");
+
+const sidebarOverlay =
+document.getElementById("sidebarOverlay");
+
+const closeSidebar =
+document.getElementById("closeSidebar");
+
+const daysOfWeek =
+["DOM","SEG","TER","QUA","QUI","SEX","SÁB"];
+
 const totalDays = 30;
 
-// MODAL
-const modalOverlay = document.getElementById("modalOverlay");
-const openModal = document.getElementById("openModal");
-const closeModal = document.getElementById("closeModal");
-const saveCompetition = document.getElementById("saveCompetition");
+/* MENU MOBILE */
 
-// MENU
-const menuBtn = document.getElementById("menuBtn");
-const sidebar = document.getElementById("sidebar");
+function abrirSidebar(){
 
-menuBtn.addEventListener("click", () => {
-  sidebar.classList.toggle("open");
-});
+  sidebar.classList.add("open");
+
+  sidebarOverlay.classList.add("active");
+
+}
+
+function fecharSidebar(){
+
+  sidebar.classList.remove("open");
+
+  sidebarOverlay.classList.remove("active");
+
+}
+
+menuBtn.addEventListener("click", abrirSidebar);
+
+closeSidebar.addEventListener("click", fecharSidebar);
+
+sidebarOverlay.addEventListener("click", fecharSidebar);
+
+/* MODAL */
 
 openModal.addEventListener("click", () => {
+
   modalOverlay.classList.add("active");
+
 });
 
-closeModal.addEventListener("click", () => {
-  modalOverlay.classList.remove("active");
-});
+closeModal.addEventListener("click", fecharModal);
 
 modalOverlay.addEventListener("click", (e) => {
-  if (e.target === modalOverlay) {
-    modalOverlay.classList.remove("active");
+
+  if(e.target === modalOverlay){
+    fecharModal();
   }
+
 });
 
-// RENDERIZAÇÃO
-function renderChallenge() {
-  challengeName.textContent = challenge.name;
-  totalParticipants.textContent = challenge.participants.length;
+function fecharModal(){
+
+  modalOverlay.classList.remove("active");
+
+}
+
+/* RENDER */
+
+function renderChallenge(){
+
+  challengeName.textContent =
+  challenge.name;
+
+  totalParticipants.textContent =
+  challenge.participants.length;
+
+  renderStats();
 
   renderRanking();
+
   renderLegend();
+
   renderCalendarHeader();
+
   renderCalendar();
+
+  salvarChallenge();
+
 }
 
-function renderRanking() {
-  rankingList.innerHTML = "";
+/* STATS */
 
-  const sorted = [...challenge.participants].sort(
-    (a, b) => b.checkins.length - a.checkins.length
+function renderStats(){
+
+  const leader =
+  [...challenge.participants]
+  .sort((a,b)=>
+    b.checkins.length - a.checkins.length
+  )[0];
+
+  leaderName.textContent =
+  leader.name;
+
+  const total =
+  challenge.participants.reduce(
+    (acc,p)=> acc + p.checkins.length,
+    0
   );
 
-  sorted.forEach((participant, index) => {
-    const position = index + 1;
+  totalTrainings.textContent =
+  total;
 
-    let positionClass = "other";
-    let medal = "🔥";
+  averagePresence.textContent =
+  Math.floor(
+    total /
+    (challenge.participants.length * totalDays)
+    * 100
+  ) + "%";
 
-    if (position === 1) {
-      positionClass = "first";
-      medal = "🥇";
-    } else if (position === 2) {
-      positionClass = "second";
-      medal = "🥈";
-    } else if (position === 3) {
-      positionClass = "third";
-      medal = "🥉";
-    }
+  bestStreak.textContent =
+  Math.max(
+    ...challenge.participants.map(
+      p => p.checkins.length
+    )
+  );
 
-    rankingList.innerHTML += `
-      <div class="ranking-item">
-        <div class="ranking-left">
-          <div class="position-badge ${positionClass}">
-            ${position}º
-          </div>
-          <div>
-            <div class="user-name">${participant.name} ${medal}</div>
-            <div class="user-days">${participant.checkins.length} dias ativos</div>
-          </div>
-        </div>
-        <div class="points">${participant.checkins.length} pts</div>
-      </div>
-    `;
-  });
+  activeDays.textContent =
+  total;
+
 }
 
-function renderLegend() {
+/* RANKING */
+
+function renderRanking(){
+
+  rankingList.innerHTML = "";
+
+  const sorted =
+  [...challenge.participants]
+  .sort((a,b)=>
+    b.checkins.length - a.checkins.length
+  );
+
+  sorted.forEach((participant,index)=>{
+
+    const item =
+    document.createElement("div");
+
+    item.className = "ranking-item";
+
+    item.innerHTML = `
+
+      <div class="ranking-left">
+
+        <div
+        class="avatar"
+        style="background:${participant.color}">
+
+          ${participant.name.charAt(0)}
+
+        </div>
+
+        <div>
+
+          <div class="user-name">
+            ${index + 1}º ${participant.name}
+          </div>
+
+          <div class="user-days">
+            ${participant.checkins.length}
+            dias ativos
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="points">
+        ${participant.checkins.length} pts
+      </div>
+
+    `;
+
+    rankingList.appendChild(item);
+
+  });
+
+}
+
+/* LEGENDA */
+
+function renderLegend(){
+
   legend.innerHTML = "";
 
-  challenge.participants.forEach((participant) => {
-    legend.innerHTML += `
-      <div class="legend-item">
-        <div class="color-dot" style="background:${participant.color}"></div>
-        <span>${participant.name}</span>
+  challenge.participants.forEach(participant=>{
+
+    const item =
+    document.createElement("div");
+
+    item.className = "legend-item";
+
+    item.innerHTML = `
+
+      <div
+      class="color-dot"
+      style="background:${participant.color}">
       </div>
+
+      <span>${participant.name}</span>
+
     `;
+
+    legend.appendChild(item);
+
   });
+
 }
 
-function renderCalendarHeader() {
+/* CALENDÁRIO */
+
+function renderCalendarHeader(){
+
   calendarHeader.innerHTML = "";
-  daysOfWeek.forEach(day => {
-    calendarHeader.innerHTML += `<div>${day}</div>`;
+
+  daysOfWeek.forEach(day=>{
+
+    const div =
+    document.createElement("div");
+
+    div.textContent = day;
+
+    calendarHeader.appendChild(div);
+
   });
+
 }
 
-function renderCalendar() {
+function renderCalendar(){
+
   calendarGrid.innerHTML = "";
 
-  for (let day = 1; day <= totalDays; day++) {
-    const participantsInDay = challenge.participants.filter(p =>
-      p.checkins.includes(day)
+  for(let day = 1; day <= totalDays; day++){
+
+    const div =
+    document.createElement("div");
+
+    div.className = "day";
+
+    const participants =
+    challenge.participants.filter(
+      p => p.checkins.includes(day)
     );
 
     let participantsHTML = "";
 
-    participantsInDay.forEach(p => {
+    participants.forEach(p=>{
+
       participantsHTML += `
-        <div class="mini-check" 
-             title="${p.name}" 
-             style="background:${p.color}">
+
+        <div
+        class="mini-check"
+        title="${p.name}"
+        style="background:${p.color}">
         </div>
+
       `;
+
     });
 
-    calendarGrid.innerHTML += `
-      <div class="day">
-        <div class="day-number">${day}</div>
-        <div class="day-participants">
-          ${participantsHTML}
-        </div>
+    div.innerHTML = `
+
+      <div class="day-number">
+        ${day}
       </div>
+
+      <div class="day-participants">
+        ${participantsHTML}
+      </div>
+
     `;
+
+    calendarGrid.appendChild(div);
+
   }
+
 }
 
-// CRIAR NOVA COMPETIÇÃO
-saveCompetition.addEventListener("click", () => {
-  const title = document.getElementById("competitionTitle").value.trim();
-  const participantsInput = document.getElementById("participantsInput").value.trim();
+/* CRIAR COMPETIÇÃO */
 
-  if (!title || !participantsInput) {
-    alert("Preencha o nome da competição e os participantes.");
+saveCompetition.addEventListener("click", ()=>{
+
+  const title =
+  document.getElementById("competitionTitle")
+  .value.trim();
+
+  const participantsInput =
+  document.getElementById("participantsInput")
+  .value.trim();
+
+  if(!title || !participantsInput){
+
+    alert("Preencha todos os campos.");
+
     return;
+
   }
 
-  const names = participantsInput
-    .split(",")
-    .map(name => name.trim())
-    .filter(name => name !== "");
+  const names =
+  participantsInput
+  .split(",")
+  .map(name=>name.trim())
+  .filter(name=>name !== "");
 
-  if (names.length === 0) {
-    alert("Adicione pelo menos 1 participante.");
-    return;
-  }
+  const colors = [
+    "#8b5cf6",
+    "#22c55e",
+    "#facc15",
+    "#f97316",
+    "#06b6d4",
+    "#ec4899"
+  ];
 
-  const colors = ["#8b5cf6", "#22c55e", "#facc15", "#f97316", "#06b6d4", "#ec4899"];
+  challenge = {
 
-  challenge.name = title;
-  challenge.participants = names.map((name, index) => ({
-    name,
-    color: colors[index % colors.length],
-    checkins: generateRandomCheckins()
-  }));
+    name:title,
+
+    participants:names.map((name,index)=>({
+
+      name,
+
+      color:colors[index % colors.length],
+
+      checkins:generateRandomCheckins()
+
+    }))
+
+  };
 
   renderChallenge();
-  modalOverlay.classList.remove("active");
 
-  document.getElementById("competitionTitle").value = "";
-  document.getElementById("participantsInput").value = "";
+  fecharModal();
+
+  document.getElementById("competitionTitle")
+  .value = "";
+
+  document.getElementById("participantsInput")
+  .value = "";
+
 });
 
-// GERA CHECKINS FAKE (para demonstração)
-function generateRandomCheckins() {
-  const amount = Math.floor(Math.random() * 12) + 3;
+/* RANDOM */
+
+function generateRandomCheckins(){
+
+  const amount =
+  Math.floor(Math.random() * 10) + 4;
+
   const days = [];
 
-  while (days.length < amount) {
-    const randomDay = Math.floor(Math.random() * totalDays) + 1;
-    if (!days.includes(randomDay)) {
+  while(days.length < amount){
+
+    const randomDay =
+    Math.floor(Math.random() * totalDays) + 1;
+
+    if(!days.includes(randomDay)){
+
       days.push(randomDay);
+
     }
+
   }
 
-  return days.sort((a, b) => a - b);
+  return days.sort((a,b)=>a-b);
+
 }
+
+/* STORAGE */
+
+function salvarChallenge(){
+
+  localStorage.setItem(
+    "challenge",
+    JSON.stringify(challenge)
+  );
+
+}
+
+/* START */
 
 renderChallenge();

@@ -6,142 +6,216 @@ const prevBtn = document.getElementById("prevBtn");
 const nextBtn = document.getElementById("nextBtn");
 const indicators = document.getElementById("indicators");
 
-// ================================
-// DADOS DOS CARDS
-// ================================
+/* =========================
+   DADOS DOS CARDS
+========================= */
+
 const cardsData = [
-  {
-    title: "Seu Treino",
-    text: "Monte, acompanhe e evolua seus treinos.",
-    image: "https://th.bing.com/th/id/R.c4185b7eeabeac37b063f79e1b9a3276?rik=K7nWHyU3V5E94g&pid=ImgRaw&r=0",
-    link: "seutreino.html"
-  },
-  {
-    title: "Análise de Treino",
-    text: "Veja desempenho, progresso e estatísticas.",
-    image: "https://www.sescpr.com.br/wp-content/uploads/2019/04/iStock-834605130.jpg",
-    link: "analise.html"
-  },
-  {
-    title: "Competição",
-    text: "Desafie amigos e participe de rankings.",
-    image: "https://blog.acqualive.com.br/wp-content/uploads/2018/01/ThinkstockPhotos-861047682-1.jpg",
-    link: "competicao.html"
-  }
+
+    {
+        title: "Seu Treino",
+
+        text: "Monte treinos personalizados e acompanhe sua evolução.",
+
+        image: "https://th.bing.com/th/id/R.c4185b7eeabeac37b063f79e1b9a3276?rik=K7nWHyU3V5E94g&pid=ImgRaw&r=0",
+
+        link: "seutreino.html"
+    },
+
+    {
+        title: "Análise de Treino",
+
+        text: "Veja gráficos, desempenho e estatísticas dos seus resultados.",
+
+        image: "https://www.sescpr.com.br/wp-content/uploads/2019/04/iStock-834605130.jpg",
+
+        link: "analise.html"
+    },
+
+    {
+        title: "Competição",
+
+        text: "Desafie atletas, suba no ranking e evolua constantemente.",
+
+        image: "https://blog.acqualive.com.br/wp-content/uploads/2018/01/ThinkstockPhotos-861047682-1.jpg",
+
+        link: "competicao.html"
+    }
+
 ];
 
-// índice do card que fica no centro
 let currentCenter = 1;
 
-// ================================
-// MENU HOVER
-// ================================
+/* =========================
+   MENU
+========================= */
+
 menuHover.addEventListener("mouseenter", () => {
-  dropdownMenu.classList.add("show");
+
+    dropdownMenu.classList.add("show");
+
 });
 
-document.querySelector(".menu-wrapper").addEventListener("mouseleave", () => {
-  dropdownMenu.classList.remove("show");
+document.querySelector(".menu-wrapper")
+.addEventListener("mouseleave", () => {
+
+    dropdownMenu.classList.remove("show");
+
 });
 
-// ================================
-// RENDERIZA O CARROSSEL
-// ================================
-function renderCarousel() {
-  carousel.innerHTML = "";
+/* =========================
+   RENDER
+========================= */
 
-  const total = cardsData.length;
+function renderCarousel(){
 
-  const leftIndex = (currentCenter - 1 + total) % total;
-  const centerIndex = currentCenter;
-  const rightIndex = (currentCenter + 1) % total;
+    carousel.innerHTML = "";
 
-  const visibleCards = [leftIndex, centerIndex, rightIndex];
+    const total = cardsData.length;
 
-  visibleCards.forEach((index, position) => {
-    const card = cardsData[index];
-    const isCenter = position === 1;
+    const leftIndex =
+    (currentCenter - 1 + total) % total;
 
-    const cardElement = document.createElement("div");
-    cardElement.className = `card ${isCenter ? "destaque" : ""}`;
+    const centerIndex = currentCenter;
 
-    cardElement.innerHTML = `
-      <img src="${card.image}" alt="${card.title}">
-      <div class="overlay">
-        <h3>${card.title}</h3>
-        <p>${card.text}</p>
-      </div>
-    `;
+    const rightIndex =
+    (currentCenter + 1) % total;
 
-    // ================================
-    // CLIQUE NO CARD
-    // ================================
-    cardElement.addEventListener("click", () => {
-      if (card.link) {
-        window.location.href = card.link;
-      }
+    const visibleCards = [
+        leftIndex,
+        centerIndex,
+        rightIndex
+    ];
+
+    visibleCards.forEach((index, position) => {
+
+        const card = cardsData[index];
+
+        const isCenter = position === 1;
+
+        const cardElement =
+        document.createElement("div");
+
+        cardElement.className =
+        `card ${isCenter ? "destaque" : ""}`;
+
+        cardElement.innerHTML = `
+
+            <img src="${card.image}" alt="${card.title}">
+
+            <div class="overlay">
+
+                <h3>${card.title}</h3>
+
+                <p>${card.text}</p>
+
+            </div>
+
+        `;
+
+        /* CLIQUE */
+
+        cardElement.addEventListener("click", () => {
+
+            window.location.href = card.link;
+
+        });
+
+        carousel.appendChild(cardElement);
+
     });
 
-    carousel.appendChild(cardElement);
-  });
+    updateIndicators();
 
-  updateIndicators();
 }
 
-// ================================
-// ATUALIZA AS BOLINHAS
-// ================================
-function updateIndicators() {
-  indicators.innerHTML = "";
+/* =========================
+   INDICADORES
+========================= */
 
-  cardsData.forEach((_, index) => {
-    const dot = document.createElement("div");
-    dot.className = `dot ${index === currentCenter ? "active" : ""}`;
+function updateIndicators(){
 
-    dot.addEventListener("click", () => {
-      currentCenter = index;
-      renderCarousel();
+    indicators.innerHTML = "";
+
+    cardsData.forEach((_, index) => {
+
+        const dot = document.createElement("div");
+
+        dot.className =
+        `dot ${index === currentCenter ? "active" : ""}`;
+
+        dot.addEventListener("click", () => {
+
+            currentCenter = index;
+
+            renderCarousel();
+
+        });
+
+        indicators.appendChild(dot);
+
     });
 
-    indicators.appendChild(dot);
-  });
 }
 
-// ================================
-// BOTÕES DO CARROSSEL
-// ================================
+/* =========================
+   BOTÕES
+========================= */
+
 nextBtn.addEventListener("click", () => {
-  currentCenter = (currentCenter + 1) % cardsData.length;
-  renderCarousel();
+
+    currentCenter =
+    (currentCenter + 1) % cardsData.length;
+
+    renderCarousel();
+
 });
 
 prevBtn.addEventListener("click", () => {
-  currentCenter = (currentCenter - 1 + cardsData.length) % cardsData.length;
-  renderCarousel();
+
+    currentCenter =
+    (currentCenter - 1 + cardsData.length)
+    % cardsData.length;
+
+    renderCarousel();
+
 });
 
-// ================================
-// AUTOPLAY (troca automática)
-// ================================
+/* =========================
+   AUTOPLAY
+========================= */
+
 let autoPlay = setInterval(() => {
-  currentCenter = (currentCenter + 1) % cardsData.length;
-  renderCarousel();
+
+    currentCenter =
+    (currentCenter + 1) % cardsData.length;
+
+    renderCarousel();
+
 }, 5000);
 
-// pausa autoplay quando passa o mouse
 carousel.addEventListener("mouseenter", () => {
-  clearInterval(autoPlay);
+
+    clearInterval(autoPlay);
+
 });
 
-// volta autoplay quando tira o mouse
 carousel.addEventListener("mouseleave", () => {
-  autoPlay = setInterval(() => {
-    currentCenter = (currentCenter + 1) % cardsData.length;
-    renderCarousel();
-  }, 5000);
+
+    autoPlay = setInterval(() => {
+
+        currentCenter =
+        (currentCenter + 1)
+        % cardsData.length;
+
+        renderCarousel();
+
+    }, 5000);
+
 });
 
-// ================================
-// INICIA
-// ================================
+/* =========================
+   INICIAR
+========================= */
+
 renderCarousel();

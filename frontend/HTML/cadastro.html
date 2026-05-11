@@ -1,37 +1,78 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TREIOR - Cadastro</title>
+
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../CSS/cadastro.css">
-
-    <title>TREIOR</title>
 </head>
 
 <body>
-    
+
     <main class="main">
-        
+
         <form id="cadastroForm">
 
-    <h1><img src="../imagens/Logo.png" alt="" class="logo"></h1>
+            <img src="../imagens/Logo.png" alt="Logo TREIOR" class="logo">
 
-    
-    <div class="input-box">
-        <input placeholder="Email" type="email">
-    </div>
+            <h1>Cadastro</h1>
 
-    <div class="input-box">
-        <input placeholder="Senha" type="password">
-    </div>
+            <p class="subtitulo">
+                Crie sua conta para continuar
+            </p>
 
-    <button type="submit" class="login">Cadastre-se</button>
+            <!-- NOME -->
+            <div class="input-box">
+                <input type="text" id="nome" placeholder="Nome" required>
+                <i class='bx bx-user'></i>
+            </div>
 
-</form>
+            <!-- SOBRENOME -->
+            <div class="input-box">
+                <input type="text" id="sobrenome" placeholder="Sobrenome" required>
+                <i class='bx bx-user'></i>
+            </div>
 
-<script src="../JS/cadastro.js"></script>
+            <!-- EMAIL -->
+            <div class="input-box">
+                <input type="email" id="email" placeholder="Email" required>
+                <i class='bx bx-envelope'></i>
+            </div>
+
+            <!-- SENHA -->
+            <div class="input-box">
+                <input type="password" id="senha" placeholder="Senha" required>
+                <i class='bx bx-lock-alt'></i>
+            </div>
+
+            <!-- CONFIRMAR SENHA -->
+            <div class="input-box">
+                <input type="password" id="confirmarSenha" placeholder="Confirmar senha" required>
+                <i class='bx bx-lock'></i>
+            </div>
+
+            <!-- BOTÃO -->
+            <button type="submit" class="login">
+                Cadastre-se
+            </button>
+
+            <div class="cadastro">
+                <p>
+                    Já possui conta?
+                    <a href="login.html">Entrar</a>
+                </p>
+            </div>
+
+        </form>
+
     </main>
+
+    <script src="../JS/cadastro.js"></script>
+
 </body>
 
 </html>

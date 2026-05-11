@@ -1,25 +1,68 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Treiour - Desafio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>TREIOR - Competição</title>
+
   <link rel="stylesheet" href="../CSS/competicao.css">
+
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
+
 <body>
+
+  <!-- OVERLAY -->
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
   <div class="app">
 
     <!-- SIDEBAR -->
     <aside class="sidebar" id="sidebar">
-      <div class="logo">TREIOUR</div>
+
+      <div class="sidebar-top">
+
+        <div class="logo">
+          <img src="../imagens/Logo.png" alt="TREIOR">
+        </div>
+
+        <button class="close-sidebar" id="closeSidebar">
+          <i class='bx bx-x'></i>
+        </button>
+
+      </div>
 
       <nav>
-        <a href="#"> Início</a>
-        <a href="#"> Treinos</a>
-        <a href="#"> Análises</a>
-        <a href="#" class="active"> Desafios</a>
-        <a href="#"> Configurações</a>
+
+        <a href="menu2.html">
+          <i class='bx bx-home-alt'></i>
+          Início
+        </a>
+
+        <a href="seutreino.html">
+          <i class='bx bx-dumbbell'></i>
+          Treinos
+        </a>
+
+        <a href="analise.html">
+          <i class='bx bx-line-chart'></i>
+          Análises
+        </a>
+
+        <a href="competicao.html" class="active">
+          <i class='bx bx-trophy'></i>
+          Competiçao
+        </a>
+
+        <a href="#">
+          <i class='bx bx-cog'></i>
+          Configurações
+        </a>
+
       </nav>
+
     </aside>
 
     <!-- MAIN -->
@@ -27,89 +70,176 @@
 
       <!-- TOPBAR -->
       <header class="topbar">
-        <button class="menu-btn" id="menuBtn">☰</button>
-        <h1>Desafio</h1>
-        <button class="create-btn" id="openModal">+ Criar competição</button>
+
+        <div class="left-topbar">
+
+          <button class="menu-btn" id="menuBtn">
+            <i class='bx bx-menu'></i>
+          </button>
+
+          <div>
+            <h1>Competição</h1>
+
+            <p class="topbar-subtitle">
+              Acompanhe os melhores atletas do mês
+            </p>
+          </div>
+
+        </div>
+
+        <button class="create-btn" id="openModal">
+          <i class='bx bx-plus'></i>
+          Criar competição
+        </button>
+
       </header>
 
-      <!-- COMPETIÇÃO -->
+      <!-- HEADER -->
       <section class="challenge-header">
+
         <div>
-          <p class="small-label">Competição atual</p>
-          <h2 id="challengeName">Desafio de Abril</h2>
+
+          <p class="small-label">
+            Competição atual
+          </p>
+
+          <h2 id="challengeName">
+            Desafio de Abril
+          </h2>
+
           <p class="challenge-description">
             Disputa de consistência para ver quem mais treinou no mês.
           </p>
+
         </div>
 
         <div class="challenge-info">
+
           <div class="info-card">
             <span>👥 Participantes</span>
-            <strong id="totalParticipants">3</strong>
+            <strong id="totalParticipants">0</strong>
           </div>
+
           <div class="info-card">
-            <span>📅 Mês</span>
-            <strong>Abril</strong>
+            <span>🔥 Melhor sequência</span>
+            <strong id="bestStreak">0</strong>
           </div>
+
+          <div class="info-card">
+            <span>📅 Dias ativos</span>
+            <strong id="activeDays">0</strong>
+          </div>
+
         </div>
+
       </section>
 
-      <!-- CONTEÚDO -->
+      <!-- STATS -->
+      <section class="stats-grid">
+
+        <div class="stat-card">
+          <span>🏆 Líder atual</span>
+          <h2 id="leaderName">-</h2>
+        </div>
+
+        <div class="stat-card">
+          <span>💪 Total de treinos</span>
+          <h2 id="totalTrainings">0</h2>
+        </div>
+
+        <div class="stat-card">
+          <span>⚡ Média de presença</span>
+          <h2 id="averagePresence">0%</h2>
+        </div>
+
+      </section>
+
+      <!-- GRID -->
       <section class="dashboard-grid">
 
         <!-- RANKING -->
         <div class="card ranking-card">
+
           <div class="card-header">
             <h3>Ranking</h3>
             <p>Quem está liderando o desafio</p>
           </div>
 
           <div class="ranking-list" id="rankingList"></div>
+
         </div>
 
         <!-- PARTICIPANTES -->
         <div class="card participants-card">
+
           <div class="card-header">
             <h3>Participantes</h3>
             <p>Legenda do calendário</p>
           </div>
 
           <div class="legend" id="legend"></div>
+
         </div>
 
         <!-- CALENDÁRIO -->
         <div class="card calendar-card">
+
           <div class="card-header">
             <h3>Calendário de Presença</h3>
             <p>Dias em que cada participante treinou</p>
           </div>
 
           <div class="calendar-header" id="calendarHeader"></div>
+
           <div class="calendar-grid" id="calendarGrid"></div>
+
         </div>
 
       </section>
+
     </main>
+
   </div>
 
   <!-- MODAL -->
   <div class="modal-overlay" id="modalOverlay">
+
     <div class="modal">
+
       <h2>Criar nova competição</h2>
 
-      <label for="competitionTitle">Nome da competição</label>
-      <input type="text" id="competitionTitle" placeholder="Ex: Desafio de Maio">
+      <label>Nome da competição</label>
 
-      <label for="participantsInput">Participantes (separados por vírgula)</label>
-      <input type="text" id="participantsInput" placeholder="Ex: Você, Pedro, João">
+      <input
+        type="text"
+        id="competitionTitle"
+        placeholder="Ex: Desafio de Maio">
+
+      <label>Participantes</label>
+
+      <input
+        type="text"
+        id="participantsInput"
+        placeholder="Ex: Luis, Pedro, João">
 
       <div class="modal-actions">
-        <button class="cancel-btn" id="closeModal">Cancelar</button>
-        <button class="save-btn" id="saveCompetition">Criar</button>
+
+        <button class="cancel-btn" id="closeModal">
+          Cancelar
+        </button>
+
+        <button class="save-btn" id="saveCompetition">
+          Criar
+        </button>
+
       </div>
+
     </div>
+
   </div>
 
   <script src="../JS/competicao.js"></script>
+
 </body>
+
 </html>

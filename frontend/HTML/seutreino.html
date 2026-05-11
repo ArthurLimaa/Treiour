@@ -1,26 +1,144 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="../CSS/seutreino.css" rel="stylesheet">
-    <title>TREIOUR</title>
+
+    <title>TREIOR - Seu Treino</title>
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../CSS/seutreino.css">
 </head>
+
 <body>
+
+    <!-- FUNDO -->
+    <div class="blur blur1"></div>
+    <div class="blur blur2"></div>
+
+    <!-- HEADER -->
     <header>
-        <div class="menu">☰ MENU </div>
-        <div"><button class="botao-principal">INICIAR TREINO</button></div>
+
+        <!-- MENU -->
+        <div class="menu-wrapper">
+
+            <button class="menu" id="menuBtn">
+                <i class='bx bx-menu'></i>
+                MENU
+            </button>
+
+            <div class="dropdown-menu" id="dropdownMenu">
+
+                <a href="../HTML/menu2.html">
+                    <i class='bx bx-home'></i>
+                    Início
+                </a>
+
+                <a href="../HTML/seutreino.html">
+                    <i class='bx bx-dumbbell'></i>
+                    Seu Treino
+                </a>
+
+                <a href="../HTML/analise.html">
+                    <i class='bx bx-line-chart'></i>
+                    Análises
+                </a>
+
+                <a href="../HTML/competicao.html">
+                    <i class='bx bx-trophy'></i>
+                    Competição
+                </a>
+
+            </div>
+
+        </div>
+
+        <img src="../imagens/Logo.png" class="logo" alt="TREIOR">
+
     </header>
 
-        <div class="botoes-semana"> 
-            <div> <button class="btn-dias"> SEGUNDA</button></div>
-            <div> <button class="btn-dias"> TERÇA </button></div>
-            <div> <button class="btn-dias"> QUARTA </button></div>
-            <div> <button class="btn-dias"> QUINTA </button></div>
-            <div> <button class="btn-dias"> SEXTA</button></div>
-            <div> <button class="btn-dias"> SÁBADO</button></div>
-            <div> <button class="btn-dias"> DOMINGO</button></div>
-        </div>
-    
+    <!-- CONTAINER -->
+    <main class="container">
+
+        <!-- CARD PRINCIPAL -->
+        <section class="painel-treino">
+
+            <h1>Seu Treino</h1>
+
+            <p class="subtitulo">
+                Escolha um dia da semana para visualizar e iniciar seu treino.
+            </p>
+
+            <!-- TIMER -->
+            <div class="timer-box">
+
+                <span id="timer">
+                    00:00:00
+                </span>
+
+                <p id="statusTreino">
+                    Nenhum treino iniciado
+                </p>
+
+            </div>
+
+            <!-- BOTÃO -->
+            <button class="botao-principal" id="btnTreino">
+                <i class='bx bx-play'></i>
+                INICIAR TREINO
+            </button>
+
+        </section>
+
+        <!-- DIAS -->
+        <section class="dias-semana">
+
+            <button class="btn-dia active" data-dia="Segunda">
+                Segunda
+            </button>
+
+            <button class="btn-dia" data-dia="Terça">
+                Terça
+            </button>
+
+            <button class="btn-dia" data-dia="Quarta">
+                Quarta
+            </button>
+
+            <button class="btn-dia" data-dia="Quinta">
+                Quinta
+            </button>
+
+            <button class="btn-dia" data-dia="Sexta">
+                Sexta
+            </button>
+
+            <button class="btn-dia" data-dia="Sábado">
+                Sábado
+            </button>
+
+            <button class="btn-dia" data-dia="Domingo">
+                Domingo
+            </button>
+
+        </section>
+
+        <!-- TREINO -->
+        <section class="treino-box">
+
+            <h2 id="tituloDia">
+                Treino de Segunda
+            </h2>
+
+            <div class="lista-treino" id="listaTreino"></div>
+
+        </section>
+
+    </main>
+
+    <script src="../JS/seutreino.js"></script>
+
 </body>
+
 </html>

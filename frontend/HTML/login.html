@@ -1,58 +1,91 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TREIOR - Login</title>
+
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../CSS/login.css">
-
-    <title>TREIOR</title>
 </head>
 
 <body>
-    <header>
-    <img class="logo" src="../imagens/Logo.png" alt="">
-    </header>
+
     <main class="main">
-        
+
         <form id="loginForm">
 
+            <img class="logo" src="../imagens/Logo.png" alt="Logo TREIOR">
+
+            <h1>Bem-vindo</h1>
+
+            <p class="subtitulo">
+                Entre na sua conta para continuar
+            </p>
+
+            <!-- EMAIL -->
             <div class="input-box">
-                <input placeholder="Usuário" type="email"> 
-                <i class="bx bxs-user"></i>
+                <input 
+                    type="email" 
+                    id="email"
+                    placeholder="Email"
+                    required
+                >
+
+                <i class='bx bx-envelope'></i>
             </div>
 
+            <!-- SENHA -->
             <div class="input-box">
-                <input placeholder="Senha" type="password">
-                <i class="bx bxs-lock-alt"></i>
+                <input 
+                    type="password" 
+                    id="senha"
+                    placeholder="Senha"
+                    required
+                >
+
+                <i class='bx bx-lock-alt'></i>
             </div>
 
-            <!-- parte dos botões -->
-
+            <!-- LEMBRAR SENHA -->
             <div class="lembrar-senha">
-                
-                <label> 
+
+                <label>
                     <input type="checkbox">
                     Lembrar senha
                 </label>
 
-                <a href="#">Esqueci a senha</a>
-                
-                </div>
-                
+                <a href="#">
+                    Esqueci a senha
+                </a>
 
-            <button type="submit" class="login">Entrar</button>
+            </div>
 
+            <!-- BOTÃO -->
+            <button type="submit" class="login">
+                Entrar
+            </button>
+
+            <!-- CADASTRO -->
             <div class="cadastro">
+
                 <p>
-                    <a href="../HTML/cadastro.html">Cadastre-se</a>
+                    Não possui conta?
+                    <a href="../HTML/cadastro.html">
+                        Cadastre-se
+                    </a>
                 </p>
+
             </div>
 
         </form>
+
     </main>
 
     <script src="../JS/login.js"></script>
+
 </body>
 
 </html>

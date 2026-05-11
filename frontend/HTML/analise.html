@@ -1,66 +1,398 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+
     <meta charset="UTF-8">
-    <title>TREIOUR</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TREIOUR • Análise</title>
+
     <link rel="stylesheet" href="../CSS/analise.css">
+
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Icons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
 </head>
+
 <body>
 
-<header class="header">
-    <div class="menu">☰ MENU</div>
-    <div class="titulo"><img src="../imagens/Logo.png" alt="logo"></div>
-</header>
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebar">
 
-<main class="container">
+        <div class="sidebar-top">
 
-    <!-- CARD TOPO -->
-    <div class="card resumo">
-        <p><strong>Treinos na semana:</strong> 5</p>
-        <p><strong>Tempo total:</strong> 5h33</p>
-        <p><strong>Média por treino:</strong> 1h06</p>
-    </div>
+            <img src="../imagens/Logo.png" alt="TREIOUR">
 
-    <!-- GRID -->
-    <div class="grid">
+            <button class="close-menu" id="closeMenu">
+                <i class='bx bx-x'></i>
+            </button>
 
-        <!-- ESQUERDA -->
-        <div class="card">
-            <p>segunda ▮▮▮▮</p>
-            <p>terça ▮▮▮</p>
-            <p>quarta ▮▮</p>
-            <p>quinta ▮</p>
-            <p>sexta ▮▮▮▮▮</p>
-            <p>sábado ▮▮</p>
-            <p>domingo</p>
         </div>
 
-        <!-- MEIO -->
-        <div class="card center">
-            <h3>DIA MAIS ATIVO: SEXTA-FEIRA</h3>
-            <h3>DIA MENOS ATIVO: QUINTA-FEIRA</h3>
-            <p>TEMPO MÉDIO AUMENTOU EM 20%</p>
+        <nav class="sidebar-links">
 
-            <h2>DISTRIBUIÇÃO</h2>
-            <p>Superior 60%</p>
-            <p>Inferior 30%</p>
-            <p>Cardio 10%</p>
+            <a href="menu2.html">
+                <i class='bx bx-home-alt'></i>
+                Início
+            </a>
+
+            <a href="seutreino.html">
+                <i class='bx bx-dumbbell'></i>
+                Seu treino
+            </a>
+
+            <a href="analise.html" class="active">
+                <i class='bx bx-line-chart'></i>
+                Análises
+            </a>
+
+            <a href="competicao.html">
+                <i class='bx bx-trophy'></i>
+                Competições
+            </a>
+
+            <a href="#">
+                <i class='bx bx-cog'></i>
+                Configurações
+            </a>
+
+        </nav>
+
+    </aside>
+
+    <!-- OVERLAY -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- HEADER -->
+    <header class="header">
+
+        <div class="menu">
+            <i class='bx bx-menu'></i>
         </div>
 
-        <!-- DIREITA -->
-        <div class="card">
-            <p>SEG - 1H20 ↑</p>
-            <p>TER - 1H ↑</p>
-            <p>QUA - 46min ↓</p>
-            <p>QUI - 57min ↓</p>
-            <p>SEX - 1H13 ↑</p>
-            <p>SÁB - 1H ↑</p>
-            <p>DOM - 0min ↓</p>
+        <div class="logo-area">
+            <img src="../imagens/Logo.png" alt="TREIOUR">
         </div>
 
-    </div>
+        <div class="perfil">
+            <i class='bx bx-user-circle'></i>
+        </div>
 
-</main>
+    </header>
+
+    <!-- MAIN -->
+    <main class="container">
+
+        <!-- HERO -->
+        <section class="hero">
+
+            <div>
+
+                <p class="mini-title">
+                    Seu desempenho
+                </p>
+
+                <h1>
+                    Análise de Treino
+                </h1>
+
+                <p class="hero-text">
+                    Acompanhe sua evolução semanal,
+                    frequência e tempo total de treino.
+                </p>
+
+            </div>
+
+            <div class="hero-badge">
+
+                <span>
+                    🔥 Sequência atual
+                </span>
+
+                <strong>
+                    5 dias
+                </strong>
+
+            </div>
+
+        </section>
+
+        <!-- RESUMO -->
+        <section class="resumo-grid">
+
+            <div class="resumo-card">
+
+                <div class="icone azul">
+                    <i class='bx bx-dumbbell'></i>
+                </div>
+
+                <div>
+
+                    <span>
+                        Total de Treinos
+                    </span>
+
+                    <strong id="totalTreinos">
+                        0
+                    </strong>
+
+                </div>
+
+            </div>
+
+            <div class="resumo-card">
+
+                <div class="icone roxo">
+                    <i class='bx bx-time-five'></i>
+                </div>
+
+                <div>
+
+                    <span>
+                        Tempo Total
+                    </span>
+
+                    <strong id="tempoTotal">
+                        0h
+                    </strong>
+
+                </div>
+
+            </div>
+
+            <div class="resumo-card">
+
+                <div class="icone verde">
+                    <i class='bx bx-line-chart'></i>
+                </div>
+
+                <div>
+
+                    <span>
+                        Média Diária
+                    </span>
+
+                    <strong id="mediaTreino">
+                        0min
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- GRID -->
+        <section class="dashboard-grid">
+
+            <!-- GRÁFICO -->
+            <div class="card grafico-card">
+
+                <div class="card-top">
+
+                    <div>
+
+                        <h2>
+                            Frequência semanal
+                        </h2>
+
+                        <p>
+                            Quantidade de treinos realizados
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <canvas id="graficoTreinos"></canvas>
+
+            </div>
+
+            <!-- INSIGHTS -->
+            <div class="card insights-card">
+
+                <div class="card-top">
+
+                    <div>
+
+                        <h2>
+                            Insights
+                        </h2>
+
+                        <p>
+                            Resumo da sua evolução
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div class="insights-list">
+
+                    <div class="insight-item">
+
+                        <div class="insight-icon fire">
+                            🔥
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Dia mais ativo
+                            </span>
+
+                            <strong id="diaMax">
+                                -
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                    <div class="insight-item">
+
+                        <div class="insight-icon warn">
+                            ⚡
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Dia menos ativo
+                            </span>
+
+                            <strong id="diaMin">
+                                -
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                    <div class="insight-item">
+
+                        <div class="insight-icon evo">
+                            📈
+                        </div>
+
+                        <div>
+
+                            <span>
+                                Evolução
+                            </span>
+
+                            <strong id="evolucao">
+                                -
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- DISTRIBUIÇÃO -->
+                <div class="distribuicao">
+
+                    <h3>
+                        Distribuição dos treinos
+                    </h3>
+
+                    <div class="barra-item">
+
+                        <div class="barra-info">
+
+                            <span>
+                                Superior
+                            </span>
+
+                            <span id="supValor">
+                                0%
+                            </span>
+
+                        </div>
+
+                        <div class="progresso">
+                            <div id="sup"></div>
+                        </div>
+
+                    </div>
+
+                    <div class="barra-item">
+
+                        <div class="barra-info">
+
+                            <span>
+                                Inferior
+                            </span>
+
+                            <span id="infValor">
+                                0%
+                            </span>
+
+                        </div>
+
+                        <div class="progresso">
+                            <div id="inf"></div>
+                        </div>
+
+                    </div>
+
+                    <div class="barra-item">
+
+                        <div class="barra-info">
+
+                            <span>
+                                Cardio
+                            </span>
+
+                            <span id="cardioValor">
+                                0%
+                            </span>
+
+                        </div>
+
+                        <div class="progresso">
+                            <div id="cardio"></div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- TEMPO -->
+            <div class="card tempo-card">
+
+                <div class="card-top">
+
+                    <div>
+
+                        <h2>
+                            Tempo por dia
+                        </h2>
+
+                        <p>
+                            Duração dos seus treinos
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div id="tempoContainer" class="tempo-container"></div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="../JS/analise.js"></script>
 
 </body>
 </html>

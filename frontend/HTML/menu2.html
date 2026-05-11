@@ -1,53 +1,102 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Treiour</title>
-  <link rel="stylesheet" href="../CSS/menu2.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TREIOR</title>
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../CSS/menu2.css">
 </head>
+
 <body>
 
-  <header class="topo">
-    
-    <h1 class="logo"><img src="../imagens/Logo.png" alt=""></h1>
-    <div class="menu-wrapper">
-      <div class="menu" id="menuHover">
-        ☰ <span>MENU</span>
-      </div>
-      
+    <!-- FUNDO -->
+    <div class="bg-blur blur1"></div>
+    <div class="bg-blur blur2"></div>
 
-      <div class="dropdown-menu" id="dropdownMenu">
-        <a href="#">Início</a>
-        <a href="../HTML/seutreino.html">Seu Treino</a>
-        <a href="../HTML/competicao.html">Competição</a>
-        <a href="#">Perfil</a>
-      </div>
-    </div>
+    <!-- HEADER -->
+    <header class="topo">
 
-  </header>
+        <div class="menu-wrapper">
 
-  <main class="container">
-    <section class="hero">
-      <h2>Escolha sua jornada</h2>
-      <p>Treine, analise sua evolução e dispute com outros atletas.</p>
-    </section>
+            <button class="menu" id="menuHover">
+                <i class='bx bx-menu'></i>
+                <span>MENU</span>
+            </button>
 
-    <section class="carousel-container">
-      <button class="arrow left" id="prevBtn">❮</button>
+            <div class="dropdown-menu" id="dropdownMenu">
 
-      <div class="carousel" id="carousel">
-       
-      </div>
+                <a href="#">
+                    <i class='bx bx-home'></i>
+                    Início
+                </a>
 
-      <button class="arrow right" id="nextBtn">❯</button>
-    </section>
+                <a href="../HTML/seutreino.html">
+                    <i class='bx bx-dumbbell'></i>
+                    Seu Treino
+                </a>
 
-    <div class="indicators" id="indicators"></div>
+                <a href="../HTML/analise.html">
+                    <i class='bx bx-line-chart'></i>
+                    Análise
+                </a>
 
+                <a href="../HTML/competicao.html">
+                    <i class='bx bx-trophy'></i>
+                    Competição
+                </a>
 
-  </main>
+                <a href="#">
+                    <i class='bx bx-user'></i>
+                    Perfil
+                </a>
 
-  <script src="../JS/menu2.js"></script>
+            </div>
+
+        </div>
+
+        <img class="logo" src="../imagens/Logo.png" alt="TREIOR">
+
+    </header>
+
+    <!-- CONTEÚDO -->
+    <main class="container">
+
+        <section class="hero">
+
+            <h1></h1>
+
+            <p>
+                Evolua seus treinos, acompanhe resultados e dispute com atletas de todo lugar.
+            </p>
+
+        </section>
+
+        <!-- CARROSSEL -->
+        <section class="carousel-container">
+
+            <button class="arrow left" id="prevBtn">
+                <i class='bx bx-chevron-left'></i>
+            </button>
+
+            <div class="carousel" id="carousel"></div>
+
+            <button class="arrow right" id="nextBtn">
+                <i class='bx bx-chevron-right'></i>
+            </button>
+
+        </section>
+
+        <!-- INDICADORES -->
+        <div class="indicators" id="indicators"></div>
+
+    </main>
+
+    <script src="../JS/menu2.js"></script>
+
 </body>
+
 </html>
