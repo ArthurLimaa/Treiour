@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TREIOR - Perfil</title>
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <link rel="stylesheet" href="../CSS/perfil.css">
+</head>
+
+<body>
+
+    <!-- BLUR -->
+    <div class="blur blur1"></div>
+    <div class="blur blur2"></div>
+
+    <!-- HEADER -->
+    <header>
+
+        <!-- MENU -->
+        <div class="menu-wrapper">
+
+            <button class="menu" id="menuBtn">
+                <i class='bx bx-menu'></i>
+                MENU
+            </button>
+
+            <div class="dropdown-menu" id="dropdownMenu">
+
+                <a href="../HTML/menu2.html">
+                    <i class='bx bx-home'></i>
+                    Início
+                </a>
+
+                <a href="../HTML/seutreino.html">
+                    <i class='bx bx-dumbbell'></i>
+                    Seu Treino
+                </a>
+
+                <a href="../HTML/analise.html">
+                    <i class='bx bx-line-chart'></i>
+                    Análises
+                </a>
+
+                <a href="../HTML/competicao.html">
+                    <i class='bx bx-trophy'></i>
+                    Competição
+                </a>
+
+                <a href="../HTML/perfil.html">
+                    <i class='bx bx-user'></i>
+                    Perfil
+                </a>
+
+            </div>
+
+        </div>
+
+        <img src="../imagens/Logo.png" class="logo" alt="TREIOR">
+
+    </header>
+
+    <!-- CONTAINER -->
+    <main class="container">
+
+        <!-- PERFIL -->
+        <section class="perfil-card">
+
+            <div class="foto-area">
+
+                <div class="foto-perfil">
+
+                    <img
+                        id="previewFoto"
+                        src="https://i.imgur.com/8Km9tLL.png"
+                        alt="Foto Perfil">
+
+                    <label for="inputFoto" class="editar-foto">
+                        <i class='bx bx-camera'></i>
+                    </label>
+
+                    <input type="file" id="inputFoto" accept="image/*">
+
+                </div>
+
+                <h1 id="nomePerfil">
+                    Seu Nome
+                </h1>
+
+                <p class="cargo">
+                    Atleta TREIOR
+                </p>
+
+            </div>
+
+            <!-- INFO -->
+            <div class="perfil-info">
+
+                <div class="campo">
+
+                    <label>Nome Completo</label>
+
+                    <input type="text"
+                        id="nomeInput"
+                        placeholder="Digite seu nome">
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Email</label>
+
+                    <input type="email"
+                        id="emailInput"
+                        placeholder="Digite seu email">
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Idade</label>
+
+                    <input type="number"
+                        id="idadeInput"
+                        placeholder="Sua idade">
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Peso</label>
+
+                    <input type="text"
+                        id="pesoInput"
+                        placeholder="Ex: 78kg">
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Altura</label>
+
+                    <input type="text"
+                        id="alturaInput"
+                        placeholder="Ex: 1.80">
+
+                </div>
+
+                <div class="campo">
+
+                    <label>Objetivo</label>
+
+                    <select id="objetivoInput">
+
+                        <option value="">
+                            Escolha seu objetivo
+                        </option>
+
+                        <option>
+                            Ganho de Massa
+                        </option>
+
+                        <option>
+                            Emagrecimento
+                        </option>
+
+                        <option>
+                            Performance
+                        </option>
+
+                        <option>
+                            Condicionamento
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+            <!-- STATS -->
+            <div class="estatisticas">
+
+                <div class="stat-box">
+
+                    <i class='bx bx-dumbbell'></i>
+
+                    <h2 id="treinosFeitos">
+                        0
+                    </h2>
+
+                    <p>Treinos</p>
+
+                </div>
+
+                <div class="stat-box">
+
+                    <i class='bx bx-time'></i>
+
+                    <h2 id="tempoTreino">
+                        0h
+                    </h2>
+
+                    <p>Horas</p>
+
+                </div>
+
+                <div class="stat-box">
+
+                    <i class='bx bx-trophy'></i>
+
+                    <h2>
+                        PRO
+                    </h2>
+
+                    <p>Nível</p>
+
+                </div>
+
+            </div>
+
+            <!-- BOTÃO -->
+            <button class="salvar-btn" id="salvarPerfil">
+
+                <i class='bx bx-save'></i>
+
+                Salvar Perfil
+
+            </button>
+
+        </section>
+
+    </main>
+
+    <script src="../JS/perfil.js"></script>
+
+</body>
+
+</html>

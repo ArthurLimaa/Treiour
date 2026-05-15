@@ -18,7 +18,7 @@ public class UsuarioController {
     @Autowired
     private UsuarioService service;
 
-    @PostMapping("/cadastro")
+    @PostMapping("/criar")
     public Usuario cadastrar(@RequestBody Usuario usuario) {
         return service.cadastrar(usuario);
     }
@@ -27,4 +27,4 @@ public class UsuarioController {
     public Usuario login(@RequestBody Usuario usuario) {
         return service.login(usuario.getEmail(), usuario.getSenha());
     }
-}
+} 

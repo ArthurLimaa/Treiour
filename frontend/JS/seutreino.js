@@ -14,6 +14,32 @@ document.getElementById("tituloDia");
 const listaTreino =
 document.getElementById("listaTreino");
 
+/* MODAL */
+
+const btnEditar =
+document.getElementById("btnEditar");
+
+const btnNovoExercicio =
+document.getElementById("btnNovoExercicio");
+
+const modalOverlay =
+document.getElementById("modalOverlay");
+
+const fecharModal =
+document.getElementById("fecharModal");
+
+const salvarExercicio =
+document.getElementById("salvarExercicio");
+
+const nomeExercicio =
+document.getElementById("nomeExercicio");
+
+const detalhesExercicio =
+document.getElementById("detalhesExercicio");
+
+const seriesExercicio =
+document.getElementById("seriesExercicio");
+
 /* MENU */
 
 const menuBtn =
@@ -39,9 +65,7 @@ document.addEventListener("click", (e) => {
 
 });
 
-/* =========================
-   TREINOS
-========================= */
+/* TREINOS */
 
 const treinos = {
 
@@ -73,11 +97,6 @@ const treinos = {
             nome: "Remada Curvada",
             detalhes: "Costas",
             series: "4x10"
-        },
-        {
-            nome: "Rosca Direta",
-            detalhes: "Bíceps",
-            series: "3x12"
         }
     ],
 
@@ -86,11 +105,6 @@ const treinos = {
             nome: "Agachamento",
             detalhes: "Pernas",
             series: "5x10"
-        },
-        {
-            nome: "Leg Press",
-            detalhes: "Pernas",
-            series: "4x12"
         }
     ],
 
@@ -128,9 +142,7 @@ const treinos = {
 
 };
 
-/* =========================
-   RENDER TREINO
-========================= */
+/* RENDER TREINO */
 
 function carregarTreino(dia){
 
@@ -168,9 +180,7 @@ function carregarTreino(dia){
 
 }
 
-/* =========================
-   TROCAR DIA
-========================= */
+/* TROCAR DIA */
 
 botoesDias.forEach(botao => {
 
@@ -195,9 +205,7 @@ botoesDias.forEach(botao => {
 
 });
 
-/* =========================
-   TIMER
-========================= */
+/* TIMER */
 
 let treinoAtivo = false;
 
@@ -232,9 +240,7 @@ function atualizarDisplay(){
 
 }
 
-/* =========================
-   BOTÃO TREINO
-========================= */
+/* BOTÃO TREINO */
 
 btnTreino.addEventListener("click", () => {
 
@@ -282,9 +288,7 @@ btnTreino.addEventListener("click", () => {
 
 });
 
-/* =========================
-   TEMPO SALVO
-========================= */
+/* TEMPO SALVO */
 
 function carregarTempoSalvo(dia){
 
@@ -313,9 +317,81 @@ function carregarTempoSalvo(dia){
 
 }
 
-/* =========================
-   INICIAR
-========================= */
+/* MODAL */
+
+function abrirModal(){
+
+    modalOverlay.classList.add("show");
+
+}
+
+function fecharModalFunc(){
+
+    modalOverlay.classList.remove("show");
+
+}
+
+btnEditar.addEventListener("click", abrirModal);
+
+btnNovoExercicio.addEventListener("click", abrirModal);
+
+fecharModal.addEventListener("click", fecharModalFunc);
+
+modalOverlay.addEventListener("click", (e) => {
+
+    if(e.target === modalOverlay){
+
+        fecharModalFunc();
+
+    }
+
+});
+
+/* SALVAR EXERCÍCIO */
+
+salvarExercicio.addEventListener("click", () => {
+
+    const nome =
+    nomeExercicio.value.trim();
+
+    const detalhes =
+    detalhesExercicio.value.trim();
+
+    const series =
+    seriesExercicio.value.trim();
+
+    if(
+        nome === "" ||
+        detalhes === "" ||
+        series === ""
+    ){
+        alert("Preencha todos os campos.");
+        return;
+    }
+
+    const diaAtual =
+    document.querySelector(".btn-dia.active")
+    .dataset.dia;
+
+    treinos[diaAtual].push({
+
+        nome,
+        detalhes,
+        series
+
+    });
+
+    carregarTreino(diaAtual);
+
+    nomeExercicio.value = "";
+    detalhesExercicio.value = "";
+    seriesExercicio.value = "";
+
+    fecharModalFunc();
+
+});
+
+/* INICIAR */
 
 carregarTreino("Segunda");
 
