@@ -83,11 +83,20 @@
 
             </div>
 
-            <!-- BOTÃO -->
-            <button class="botao-principal" id="btnTreino">
-                <i class='bx bx-play'></i>
-                INICIAR TREINO
-            </button>
+            <!-- BOTÕES -->
+            <div class="acoes-treino">
+
+                <button class="botao-principal" id="btnTreino">
+                    <i class='bx bx-play'></i>
+                    INICIAR TREINO
+                </button>
+
+                <button class="botao-secundario" id="btnEditar">
+                    <i class='bx bx-edit'></i>
+                    EDITAR TREINO
+                </button>
+
+            </div>
 
         </section>
 
@@ -127,15 +136,100 @@
         <!-- TREINO -->
         <section class="treino-box">
 
-            <h2 id="tituloDia">
-                Treino de Segunda
-            </h2>
+            <div class="topo-treino">
+
+                <h2 id="tituloDia">
+                    Treino de Segunda
+                </h2>
+
+                <button class="btn-add-exercicio" id="btnNovoExercicio">
+                    <i class='bx bx-plus'></i>
+                    Novo Exercício
+                </button>
+
+            </div>
 
             <div class="lista-treino" id="listaTreino"></div>
 
         </section>
 
     </main>
+
+    <!-- MODAL -->
+    <div class="modal-overlay" id="modalOverlay">
+
+        <div class="modal">
+
+            <div class="modal-topo">
+
+                <h2>Adicionar Exercício</h2>
+
+                <button class="fechar-modal" id="fecharModal">
+                    <i class='bx bx-x'></i>
+                </button>
+
+            </div>
+
+            <div class="campo">
+
+                <label>Grupo muscular</label>
+
+                <select id="grupoMuscular">
+
+                    <option value="">Selecione</option>
+
+                    <option value="Peito">Peito</option>
+
+                    <option value="Braço">Braço</option>
+
+                    <option value="Ombro">Ombro</option>
+
+                    <option value="Costas">Costas</option>
+
+                    <option value="Pernas">Pernas</option>
+
+                    <option value="Abdômen">Abdômen</option>
+
+                </select>
+
+            </div>
+
+            <div class="campo">
+
+                <label>Exercício</label>
+
+                <select id="nomeExercicio">
+
+                    <option value="">Selecione um grupo muscular</option>
+
+                </select>
+
+            </div>
+
+            <div class="campo">
+
+                <label>Séries</label>
+
+                <input type="text" id="seriesExercicio" placeholder="Ex: 4x12">
+
+            </div>
+
+            <div class="campo">
+
+                <label>Peso</label>
+
+                <input type="text" id="pesoExercicio" placeholder="Ex: 20kg">
+
+            </div>
+
+            <button class="salvar-exercicio" id="salvarExercicio">
+                <i class='bx bx-save'></i>
+                Salvar Exercício
+            </button>
+
+        </div>
+
+    </div>
 
     <script src="../JS/seutreino.js"></script>
 

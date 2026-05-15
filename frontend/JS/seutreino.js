@@ -14,6 +14,35 @@ document.getElementById("tituloDia");
 const listaTreino =
 document.getElementById("listaTreino");
 
+/* MODAL */
+
+const btnEditar =
+document.getElementById("btnEditar");
+
+const btnNovoExercicio =
+document.getElementById("btnNovoExercicio");
+
+const modalOverlay =
+document.getElementById("modalOverlay");
+
+const fecharModal =
+document.getElementById("fecharModal");
+
+const salvarExercicio =
+document.getElementById("salvarExercicio");
+
+const nomeExercicio =
+document.getElementById("nomeExercicio");
+
+const grupoMuscular =
+document.getElementById("grupoMuscular");
+
+const seriesExercicio =
+document.getElementById("seriesExercicio");
+
+const pesoExercicio =
+document.getElementById("pesoExercicio");
+
 /* MENU */
 
 const menuBtn =
@@ -39,9 +68,55 @@ document.addEventListener("click", (e) => {
 
 });
 
-/* =========================
-   TREINOS
-========================= */
+/* EXERCÍCIOS */
+
+const exerciciosPorGrupo = {
+
+    "Peito": [
+        "Supino Reto",
+        "Supino Inclinado",
+        "Crucifixo",
+        "Crossover"
+    ],
+
+    "Braço": [
+        "Rosca Direta",
+        "Rosca Martelo",
+        "Tríceps Pulley",
+        "Tríceps Francês"
+    ],
+
+    "Ombro": [
+        "Desenvolvimento",
+        "Elevação Lateral",
+        "Elevação Frontal",
+        "Arnold Press"
+    ],
+
+    "Costas": [
+        "Puxada Alta",
+        "Remada Curvada",
+        "Remada Baixa",
+        "Pulldown"
+    ],
+
+    "Pernas": [
+        "Agachamento",
+        "Leg Press",
+        "Cadeira Extensora",
+        "Stiff"
+    ],
+
+    "Abdômen": [
+        "Abdominal Reto",
+        "Prancha",
+        "Abdominal Infra",
+        "Elevação de Pernas"
+    ]
+
+};
+
+/* TREINOS */
 
 const treinos = {
 
@@ -49,17 +124,14 @@ const treinos = {
         {
             nome: "Supino Reto",
             detalhes: "Peito",
-            series: "4x12"
+            series: "4x12",
+            peso: "20kg"
         },
         {
             nome: "Crucifixo",
             detalhes: "Peito",
-            series: "3x15"
-        },
-        {
-            nome: "Tríceps Pulley",
-            detalhes: "Tríceps",
-            series: "4x10"
+            series: "3x15",
+            peso: "12kg"
         }
     ],
 
@@ -67,17 +139,8 @@ const treinos = {
         {
             nome: "Puxada Alta",
             detalhes: "Costas",
-            series: "4x12"
-        },
-        {
-            nome: "Remada Curvada",
-            detalhes: "Costas",
-            series: "4x10"
-        },
-        {
-            nome: "Rosca Direta",
-            detalhes: "Bíceps",
-            series: "3x12"
+            series: "4x12",
+            peso: "35kg"
         }
     ],
 
@@ -85,12 +148,8 @@ const treinos = {
         {
             nome: "Agachamento",
             detalhes: "Pernas",
-            series: "5x10"
-        },
-        {
-            nome: "Leg Press",
-            detalhes: "Pernas",
-            series: "4x12"
+            series: "5x10",
+            peso: "60kg"
         }
     ],
 
@@ -98,23 +157,26 @@ const treinos = {
         {
             nome: "Desenvolvimento",
             detalhes: "Ombro",
-            series: "4x12"
+            series: "4x12",
+            peso: "18kg"
         }
     ],
 
     "Sexta": [
         {
-            nome: "Treino Funcional",
-            detalhes: "Cardio",
-            series: "40min"
+            nome: "Rosca Direta",
+            detalhes: "Braço",
+            series: "4x10",
+            peso: "14kg"
         }
     ],
 
     "Sábado": [
         {
-            nome: "Corrida",
-            detalhes: "Cardio",
-            series: "5km"
+            nome: "Prancha",
+            detalhes: "Abdômen",
+            series: "3x1min",
+            peso: "-"
         }
     ],
 
@@ -122,15 +184,47 @@ const treinos = {
         {
             nome: "Descanso",
             detalhes: "Recuperação",
-            series: "-"
+            series: "-",
+            peso: "-"
         }
     ]
 
 };
 
-/* =========================
-   RENDER TREINO
-========================= */
+/* SELECT EXERCÍCIOS */
+
+grupoMuscular.addEventListener("change", () => {
+
+    const grupo = grupoMuscular.value;
+
+    nomeExercicio.innerHTML = "";
+
+    if(grupo === ""){
+
+        nomeExercicio.innerHTML =
+        `<option value="">
+        Selecione um grupo muscular
+        </option>`;
+
+        return;
+
+    }
+
+    exerciciosPorGrupo[grupo].forEach(exercicio => {
+
+        nomeExercicio.innerHTML += `
+        
+            <option value="${exercicio}">
+                ${exercicio}
+            </option>
+        
+        `;
+
+    });
+
+});
+
+/* RENDER TREINO */
 
 function carregarTreino(dia){
 
@@ -139,7 +233,27 @@ function carregarTreino(dia){
 
     listaTreino.innerHTML = "";
 
-    treinos[dia].forEach(exercicio => {
+    const topoAcoes =
+    document.createElement("div");
+
+    topoAcoes.className =
+    "acoes-exercicio";
+
+    topoAcoes.innerHTML = `
+
+        <button class="btn-excluir-treino"
+        onclick="excluirTreino('${dia}')">
+
+            <i class='bx bx-trash'></i>
+            Excluir treino
+
+        </button>
+
+    `;
+
+    listaTreino.appendChild(topoAcoes);
+
+    treinos[dia].forEach((exercicio, index) => {
 
         const div =
         document.createElement("div");
@@ -154,11 +268,22 @@ function carregarTreino(dia){
 
                 <p>${exercicio.detalhes}</p>
 
+                <p>Séries: ${exercicio.series}</p>
+
+                <p>Peso: ${exercicio.peso}</p>
+
             </div>
 
-            <span class="series">
-                ${exercicio.series}
-            </span>
+            <div class="acoes-exercicio">
+
+                <button class="btn-excluir"
+                onclick="excluirExercicio('${dia}', ${index})">
+
+                    <i class='bx bx-trash'></i>
+
+                </button>
+
+            </div>
 
         `;
 
@@ -168,9 +293,27 @@ function carregarTreino(dia){
 
 }
 
-/* =========================
-   TROCAR DIA
-========================= */
+/* EXCLUIR EXERCÍCIO */
+
+function excluirExercicio(dia, index){
+
+    treinos[dia].splice(index, 1);
+
+    carregarTreino(dia);
+
+}
+
+/* EXCLUIR TREINO */
+
+function excluirTreino(dia){
+
+    treinos[dia] = [];
+
+    carregarTreino(dia);
+
+}
+
+/* TROCAR DIA */
 
 botoesDias.forEach(botao => {
 
@@ -195,9 +338,7 @@ botoesDias.forEach(botao => {
 
 });
 
-/* =========================
-   TIMER
-========================= */
+/* TIMER */
 
 let treinoAtivo = false;
 
@@ -232,9 +373,7 @@ function atualizarDisplay(){
 
 }
 
-/* =========================
-   BOTÃO TREINO
-========================= */
+/* BOTÃO TREINO */
 
 btnTreino.addEventListener("click", () => {
 
@@ -282,9 +421,7 @@ btnTreino.addEventListener("click", () => {
 
 });
 
-/* =========================
-   TEMPO SALVO
-========================= */
+/* TEMPO SALVO */
 
 function carregarTempoSalvo(dia){
 
@@ -313,9 +450,93 @@ function carregarTempoSalvo(dia){
 
 }
 
-/* =========================
-   INICIAR
-========================= */
+/* MODAL */
+
+function abrirModal(){
+
+    modalOverlay.classList.add("show");
+
+}
+
+function fecharModalFunc(){
+
+    modalOverlay.classList.remove("show");
+
+}
+
+btnEditar.addEventListener("click", abrirModal);
+
+btnNovoExercicio.addEventListener("click", abrirModal);
+
+fecharModal.addEventListener("click", fecharModalFunc);
+
+modalOverlay.addEventListener("click", (e) => {
+
+    if(e.target === modalOverlay){
+
+        fecharModalFunc();
+
+    }
+
+});
+
+/* SALVAR EXERCÍCIO */
+
+salvarExercicio.addEventListener("click", () => {
+
+    const nome =
+    nomeExercicio.value;
+
+    const grupo =
+    grupoMuscular.value;
+
+    const series =
+    seriesExercicio.value.trim();
+
+    const peso =
+    pesoExercicio.value.trim();
+
+    if(
+        nome === "" ||
+        grupo === "" ||
+        series === "" ||
+        peso === ""
+    ){
+        alert("Preencha todos os campos.");
+        return;
+    }
+
+    const diaAtual =
+    document.querySelector(".btn-dia.active")
+    .dataset.dia;
+
+    treinos[diaAtual].push({
+
+        nome,
+        detalhes: grupo,
+        series,
+        peso
+
+    });
+
+    carregarTreino(diaAtual);
+
+    nomeExercicio.innerHTML =
+    `<option value="">
+    Selecione um grupo muscular
+    </option>`;
+
+    grupoMuscular.value = "";
+
+    seriesExercicio.value = "";
+
+    pesoExercicio.value = "";
+
+    fecharModalFunc();
+
+});
+
+/* INICIAR */
 
 carregarTreino("Segunda");
 

@@ -229,16 +229,36 @@ header{
     margin-top:10px;
 }
 
-/* BOTÃO */
+/* BOTÕES */
 
-.botao-principal{
+.acoes-treino{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    flex-wrap:wrap;
+}
+
+.botao-principal,
+.botao-secundario,
+.btn-add-exercicio,
+.salvar-exercicio{
     display:inline-flex;
     align-items:center;
+    justify-content:center;
     gap:10px;
 
+    border:none;
+
+    cursor:pointer;
+
+    transition:0.3s;
+
+    font-weight:600;
+}
+
+.botao-principal{
     padding:16px 35px;
 
-    border:none;
     border-radius:50px;
 
     background:
@@ -249,11 +269,6 @@ header{
     color:white;
 
     font-size:18px;
-    font-weight:600;
-
-    cursor:pointer;
-
-    transition:0.3s;
 
     box-shadow:0 10px 25px rgba(255,123,0,0.3);
 }
@@ -267,6 +282,27 @@ header{
     linear-gradient(135deg,
     #ff2d55,
     #ff0040);
+}
+
+.botao-secundario{
+    padding:16px 28px;
+
+    border-radius:50px;
+
+    background:
+    linear-gradient(135deg,
+    #6a8cff,
+    #8e5bff);
+
+    color:white;
+
+    font-size:16px;
+
+    box-shadow:0 10px 25px rgba(106,140,255,0.25);
+}
+
+.botao-secundario:hover{
+    transform:translateY(-3px);
 }
 
 /* DIAS */
@@ -335,9 +371,33 @@ header{
     border:1px solid rgba(255,255,255,0.08);
 }
 
-.treino-box h2{
+.topo-treino{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
     margin-bottom:25px;
+    flex-wrap:wrap;
+}
+
+.treino-box h2{
     font-size:2rem;
+}
+
+.btn-add-exercicio{
+    padding:14px 20px;
+
+    border-radius:16px;
+
+    background:rgba(255,255,255,0.08);
+
+    color:white;
+
+    font-size:15px;
+}
+
+.btn-add-exercicio:hover{
+    background:rgba(255,255,255,0.15);
 }
 
 .lista-treino{
@@ -370,6 +430,7 @@ header{
 
 .exercicio p{
     color:#cfcfe4;
+    margin-top:4px;
 }
 
 .series{
@@ -383,6 +444,153 @@ header{
     #8e5bff);
 
     font-weight:600;
+}
+
+/* AÇÕES */
+
+.acoes-exercicio{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.btn-excluir,
+.btn-excluir-treino{
+    border:none;
+    cursor:pointer;
+    color:white;
+    font-weight:600;
+    transition:0.3s;
+}
+
+.btn-excluir{
+    padding:10px 14px;
+
+    border-radius:12px;
+
+    background:
+    linear-gradient(135deg,
+    #ff4d4d,
+    #ff1f1f);
+}
+
+.btn-excluir:hover{
+    transform:scale(1.05);
+}
+
+.btn-excluir-treino{
+    padding:14px 18px;
+
+    border-radius:14px;
+
+    margin-bottom:10px;
+
+    background:
+    linear-gradient(135deg,
+    #ff2d55,
+    #ff0040);
+}
+
+.btn-excluir-treino:hover{
+    transform:translateY(-3px);
+}
+
+/* MODAL */
+
+.modal-overlay{
+    position:fixed;
+    inset:0;
+
+    background:rgba(0,0,0,0.6);
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    opacity:0;
+    visibility:hidden;
+
+    transition:0.3s;
+
+    z-index:999;
+}
+
+.modal-overlay.show{
+    opacity:1;
+    visibility:visible;
+}
+
+.modal{
+    width:100%;
+    max-width:450px;
+
+    background:#161826;
+
+    border-radius:28px;
+
+    padding:30px;
+
+    border:1px solid rgba(255,255,255,0.08);
+}
+
+.modal-topo{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    margin-bottom:25px;
+}
+
+.fechar-modal{
+    background:none;
+    border:none;
+    color:white;
+    font-size:30px;
+    cursor:pointer;
+}
+
+.campo{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-bottom:20px;
+}
+
+.campo input,
+.campo select{
+    padding:16px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:rgba(255,255,255,0.08);
+
+    color:white;
+
+    outline:none;
+}
+
+.campo select option{
+    background:#161826;
+    color:white;
+}
+
+.salvar-exercicio{
+    width:100%;
+
+    padding:16px;
+
+    border-radius:16px;
+
+    background:
+    linear-gradient(135deg,
+    #6a8cff,
+    #8e5bff);
+
+    color:white;
+
+    font-size:16px;
 }
 
 /* RESPONSIVO */
@@ -414,6 +622,11 @@ header{
 
     .dropdown-menu{
         width:220px;
+    }
+
+    .topo-treino{
+        flex-direction:column;
+        align-items:flex-start;
     }
 
 }
