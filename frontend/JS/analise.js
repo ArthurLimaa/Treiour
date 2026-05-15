@@ -62,27 +62,42 @@ function atualizarResumo(dados){
    GRÁFICO
 ========================= */
 
+// Função responsável por criar o gráfico
 function criarGrafico(dados){
 
+    // Pega o elemento canvas do HTML onde o gráfico será desenhado
     const ctx =
     document.getElementById("graficoTreinos");
 
+    // Cria um novo gráfico usando a biblioteca Chart.js
     new Chart(ctx, {
 
+        // Define o tipo do gráfico
+        // "bar" = gráfico de barras
         type: "bar",
 
+        // Área onde ficam os dados do gráfico
         data: {
 
+            // Labels do eixo X
+            // Cada item representa um dia da semana
             labels: dados.dias,
 
+            // Conjunto de dados do gráfico
             datasets: [{
 
+                // Nome do conjunto de dados
+                // Normalmente aparece na legenda
                 label: "Treinos",
 
+                // Valores das barras
+                // Cada número representa a altura da barra
                 data: dados.treinos,
 
+                // Deixa as bordas das barras arredondadas
                 borderRadius: 12,
 
+                // Define uma cor para cada barra
                 backgroundColor: [
                     "#8b5cf6",
                     "#a78bfa",
@@ -95,39 +110,61 @@ function criarGrafico(dados){
             }]
         },
 
+        // Configurações visuais e comportamentos do gráfico
         options: {
 
+            // Faz o gráfico se adaptar automaticamente à tela
             responsive: true,
 
+            // Configurações extras do gráfico
             plugins: {
 
+                // Configuração da legenda
                 legend: {
+
+                    // false = esconde a legenda
                     display: false
                 }
             },
 
+            // Configuração dos eixos
             scales: {
 
+                // Configuração do eixo X (horizontal)
                 x: {
 
+                    // Configuração das linhas do fundo
                     grid: {
+
+                        // Remove as linhas verticais
                         display: false
                     },
 
+                    // Configuração dos textos do eixo X
                     ticks: {
+
+                        // Cor dos nomes dos dias
                         color: "#b8b8c7"
                     }
                 },
 
+                // Configuração do eixo Y (vertical)
                 y: {
 
+                    // Faz o gráfico começar do zero
                     beginAtZero: true,
 
+                    // Configuração das linhas horizontais
                     grid: {
+
+                        // Cor das linhas do fundo
                         color: "rgba(255,255,255,0.05)"
                     },
 
+                    // Configuração dos números laterais
                     ticks: {
+
+                        // Cor dos números do eixo Y
                         color: "#b8b8c7"
                     }
                 }
@@ -140,44 +177,64 @@ function criarGrafico(dados){
    INSIGHTS
 ========================= */
 
+// Função responsável por atualizar os insights da tela
 function atualizarInsights(dados){
 
+    // Pega o maior valor dentro do array de tempo
+    // Exemplo: [80, 60, 46] → retorna 80
     const max =
     Math.max(...dados.tempo);
 
+    // Filtra os valores maiores que 0
+    // Depois pega o menor valor encontrado
+    // Isso evita considerar dias sem treino
     const min =
     Math.min(...dados.tempo.filter(t => t > 0));
 
+    // Descobre em qual posição está o maior valor
+    // Depois usa essa posição para encontrar o dia correspondente
     const diaMax =
     dados.dias[dados.tempo.indexOf(max)];
 
+    // Descobre o dia referente ao menor treino
     const diaMin =
     dados.dias[dados.tempo.indexOf(min)];
 
+    // Atualiza no HTML o melhor dia da semana
+    // Exemplo: "Seg • 1h 20min"
     document.getElementById("diaMax").innerText =
     `${diaMax} • ${formatarTempo(max)}`;
 
+    // Atualiza no HTML o menor dia da semana
     document.getElementById("diaMin").innerText =
     `${diaMin} • ${formatarTempo(min)}`;
 
+    // Define manualmente o texto de evolução
     document.getElementById("evolucao").innerText =
     "+20% essa semana";
 
+    // Ajusta a largura da barra de treino superior
+    // Exemplo: width = "60%"
     document.getElementById("sup").style.width =
     dados.distribuicao.superior + "%";
 
+    // Ajusta a largura da barra de treino inferior
     document.getElementById("inf").style.width =
     dados.distribuicao.inferior + "%";
 
+    // Ajusta a largura da barra de cardio
     document.getElementById("cardio").style.width =
     dados.distribuicao.cardio + "%";
 
+    // Mostra o valor percentual do treino superior
     document.getElementById("supValor").innerText =
     dados.distribuicao.superior + "%";
 
+    // Mostra o valor percentual do treino inferior
     document.getElementById("infValor").innerText =
     dados.distribuicao.inferior + "%";
 
+    // Mostra o valor percentual do cardio
     document.getElementById("cardioValor").innerText =
     dados.distribuicao.cardio + "%";
 }

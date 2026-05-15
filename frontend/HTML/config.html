@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TREIOUR | Configurações</title>
+
+    <link rel="stylesheet" href="../CSS/config.css">
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+
+<body>
+
+    <div class="bg-blur blur1"></div>
+    <div class="bg-blur blur2"></div>
+
+    <header class="topo">
+
+        <div class="menu-wrapper">
+
+            <div class="menu" id="menuBtn">
+                <i class='bx bx-grid-alt'></i>
+                <span>Menu</span>
+            </div>
+
+            <div class="dropdown-menu" id="dropdown">
+
+                <a href="menu2.html">
+                    <i class='bx bx-home-alt'></i>
+                    Início
+                </a>
+
+                <a href="treinos.html">
+                    <i class='bx bx-dumbbell'></i>
+                    Seu treino
+                </a>
+
+                <a href="competicao.html">
+                    <i class='bx bx-trophy'></i>
+                    Competição
+                </a>
+
+                <a href="sobre.html">
+                    <i class='bx bx-info-circle'></i>
+                    Sobre
+                </a>
+
+            </div>
+
+        </div>
+
+        <img src="../imagens/Logo.png" class="logo">
+
+    </header>
+
+    <main class="container">
+
+        <section class="hero">
+            <h1>Configurações</h1>
+            <p>Personalize sua experiência dentro do TREIOUR.</p>
+        </section>
+
+        <section class="config-grid">
+
+            <div class="config-card">
+
+                <div>
+                    <h2>Modo Escuro</h2>
+                    <p>Alterar tema do sistema.</p>
+                </div>
+
+                <label class="switch">
+                    <input type="checkbox" id="darkMode">
+                    <span class="slider"></span>
+                </label>
+
+            </div>
+
+            <div class="config-card">
+
+                <div>
+                    <h2>Notificações</h2>
+                    <p>Receber lembretes de treino.</p>
+                </div>
+
+                <label class="switch">
+                    <input type="checkbox" checked>
+                    <span class="slider"></span>
+                </label>
+
+            </div>
+
+            <div class="config-card">
+
+                <div>
+                    <h2>Meta semanal</h2>
+                    <p>Defina sua frequência de treino.</p>
+                </div>
+
+                <select>
+                    <option>3 treinos</option>
+                    <option selected>5 treinos</option>
+                    <option>7 treinos</option>
+                </select>
+
+            </div>
+
+            <div class="config-card danger">
+
+                <div>
+                    <h2>Excluir conta</h2>
+                    <p>Essa ação não poderá ser desfeita.</p>
+                </div>
+
+                <button id="deleteBtn">Excluir</button>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="../JS/config.js"></script>
+
+</body>
+
+</html>
