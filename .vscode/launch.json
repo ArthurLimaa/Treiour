@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-TreiourApplication<treiour>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.treiour.treiour.TreiourApplication",
+            "projectName": "treiour",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
