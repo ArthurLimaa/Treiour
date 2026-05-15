@@ -1,5 +1,7 @@
 package com.treiour.treiour.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,13 +18,11 @@ public class TreinoService {
         return treinoRepository.save(treino);
     }
 
-    public Treino editaTreinor(Treino treino) {
-        return treinoRepository.save(treino);
+    public List<Treino> listarTreinos() {
+        return treinoRepository.findAll();
     }
 
-    public void deletarTreino(String name) {
-        treinoRepository.deleteByName(name);
+    public void deletarTreino(Long id) {
+        treinoRepository.deleteById(id);
     }
-
-
 }

@@ -34,15 +34,23 @@ document.getElementById("salvarExercicio");
 const nomeExercicio =
 document.getElementById("nomeExercicio");
 
+<<<<<<< HEAD
 const grupoMuscular =
 document.getElementById("grupoMuscular");
+=======
+const detalhesExercicio =
+document.getElementById("detalhesExercicio");
+>>>>>>> 9416a3f349ba081aeae998cb2b69f159defd539d
 
 const seriesExercicio =
 document.getElementById("seriesExercicio");
 
+<<<<<<< HEAD
 const pesoExercicio =
 document.getElementById("pesoExercicio");
 
+=======
+>>>>>>> 9416a3f349ba081aeae998cb2b69f159defd539d
 /* MENU */
 
 const menuBtn =
@@ -68,6 +76,7 @@ document.addEventListener("click", (e) => {
 
 });
 
+<<<<<<< HEAD
 /* EXERCÍCIOS */
 
 const exerciciosPorGrupo = {
@@ -116,6 +125,8 @@ const exerciciosPorGrupo = {
 
 };
 
+=======
+>>>>>>> 9416a3f349ba081aeae998cb2b69f159defd539d
 /* TREINOS */
 
 const treinos = {
@@ -139,8 +150,17 @@ const treinos = {
         {
             nome: "Puxada Alta",
             detalhes: "Costas",
+<<<<<<< HEAD
             series: "4x12",
             peso: "35kg"
+=======
+            series: "4x12"
+        },
+        {
+            nome: "Remada Curvada",
+            detalhes: "Costas",
+            series: "4x10"
+>>>>>>> 9416a3f349ba081aeae998cb2b69f159defd539d
         }
     ],
 
@@ -148,8 +168,12 @@ const treinos = {
         {
             nome: "Agachamento",
             detalhes: "Pernas",
+<<<<<<< HEAD
             series: "5x10",
             peso: "60kg"
+=======
+            series: "5x10"
+>>>>>>> 9416a3f349ba081aeae998cb2b69f159defd539d
         }
     ],
 
@@ -191,6 +215,7 @@ const treinos = {
 
 };
 
+<<<<<<< HEAD
 /* SELECT EXERCÍCIOS */
 
 grupoMuscular.addEventListener("change", () => {
@@ -224,6 +249,8 @@ grupoMuscular.addEventListener("change", () => {
 
 });
 
+=======
+>>>>>>> 9416a3f349ba081aeae998cb2b69f159defd539d
 /* RENDER TREINO */
 
 function carregarTreino(dia){
@@ -293,6 +320,7 @@ function carregarTreino(dia){
 
 }
 
+<<<<<<< HEAD
 /* EXCLUIR EXERCÍCIO */
 
 function excluirExercicio(dia, index){
@@ -313,6 +341,8 @@ function excluirTreino(dia){
 
 }
 
+=======
+>>>>>>> 9416a3f349ba081aeae998cb2b69f159defd539d
 /* TROCAR DIA */
 
 botoesDias.forEach(botao => {
@@ -485,14 +515,22 @@ modalOverlay.addEventListener("click", (e) => {
 salvarExercicio.addEventListener("click", () => {
 
     const nome =
+<<<<<<< HEAD
     nomeExercicio.value;
 
     const grupo =
     grupoMuscular.value;
+=======
+    nomeExercicio.value.trim();
+
+    const detalhes =
+    detalhesExercicio.value.trim();
+>>>>>>> 9416a3f349ba081aeae998cb2b69f159defd539d
 
     const series =
     seriesExercicio.value.trim();
 
+<<<<<<< HEAD
     const peso =
     pesoExercicio.value.trim();
 
@@ -501,6 +539,12 @@ salvarExercicio.addEventListener("click", () => {
         grupo === "" ||
         series === "" ||
         peso === ""
+=======
+    if(
+        nome === "" ||
+        detalhes === "" ||
+        series === ""
+>>>>>>> 9416a3f349ba081aeae998cb2b69f159defd539d
     ){
         alert("Preencha todos os campos.");
         return;
@@ -513,14 +557,20 @@ salvarExercicio.addEventListener("click", () => {
     treinos[diaAtual].push({
 
         nome,
+<<<<<<< HEAD
         detalhes: grupo,
         series,
         peso
+=======
+        detalhes,
+        series
+>>>>>>> 9416a3f349ba081aeae998cb2b69f159defd539d
 
     });
 
     carregarTreino(diaAtual);
 
+<<<<<<< HEAD
     nomeExercicio.innerHTML =
     `<option value="">
     Selecione um grupo muscular
@@ -532,6 +582,12 @@ salvarExercicio.addEventListener("click", () => {
 
     pesoExercicio.value = "";
 
+=======
+    nomeExercicio.value = "";
+    detalhesExercicio.value = "";
+    seriesExercicio.value = "";
+
+>>>>>>> 9416a3f349ba081aeae998cb2b69f159defd539d
     fecharModalFunc();
 
 });

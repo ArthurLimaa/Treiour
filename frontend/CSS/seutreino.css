@@ -446,6 +446,7 @@ header{
     font-weight:600;
 }
 
+<<<<<<< HEAD
 /* AÇÕES */
 
 .acoes-exercicio{
@@ -495,6 +496,8 @@ header{
     transform:translateY(-3px);
 }
 
+=======
+>>>>>>> 9416a3f349ba081aeae998cb2b69f159defd539d
 /* MODAL */
 
 .modal-overlay{
@@ -556,8 +559,12 @@ header{
     margin-bottom:20px;
 }
 
+<<<<<<< HEAD
 .campo input,
 .campo select{
+=======
+.campo input{
+>>>>>>> 9416a3f349ba081aeae998cb2b69f159defd539d
     padding:16px;
 
     border:none;
@@ -571,11 +578,14 @@ header{
     outline:none;
 }
 
+<<<<<<< HEAD
 .campo select option{
     background:#161826;
     color:white;
 }
 
+=======
+>>>>>>> 9416a3f349ba081aeae998cb2b69f159defd539d
 .salvar-exercicio{
     width:100%;
 
