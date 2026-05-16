@@ -35,7 +35,7 @@ const cardsData = [
         image: "https://th.bing.com/th/id/R.c4185b7eeabeac37b063f79e1b9a3276?rik=K7nWHyU3V5E94g&pid=ImgRaw&r=0",
 
         // Página para onde o usuário será levado
-        link: "seutreino.html"
+        link: "../html/treinos.html"
     },
 
     // Segundo card
